@@ -5,7 +5,7 @@
     "bufferutil": "^4.0.8",
     "discord.js": "^14.15.2",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "express": "^4.22.1",
     "keyv": "^5.2.3",
     "node-fetch-cache": "^5.1.0",
     "undici": "^7.2.3",
