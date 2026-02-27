@@ -1,6 +1,7 @@
 services:
   dcbadge:
     #build: .
+    restart: unless-stopped
     image: ghcr.io/limesdotpink/dcbadge:v3.0.0
     ports:
      - '9398:9398'
