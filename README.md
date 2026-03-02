@@ -1,19 +1,19 @@
-<h1 style="text-align: center">Discord Markdown Badge</h1>
+<h1 style="text-align: center">dcbadge</h1>
 
 A customizable badge that shows your Discord account, a server invite, or a bot account.
 
-<table>
+<img width="1280" height="640" alt="dcbadge" src="https://github.com/user-attachments/assets/2b5f0a85-3b5d-4238-a7b3-7f2f3695e5b5" />
+
+<table width="100%">
   <tr>
-    <th><a href="#user-account">User Account</a></th>
-    <td><img src="https://dcbadge.limes.pink/api/shield/406125028065804289" alt="" /></td>
+    <th width="500px"><a href="#user-account">User Account</a></th>
+    <th width="500px"><a href="#server-invite">Server Invite</a></th>
+    <th width="500px"><a href="#bot-account">Bot Account</a></th>
   </tr>
   <tr>
-    <th><a href="#server-invite">Server Invite</a></th>
-    <td><a target="_blank" href="https://discord.gg/zkspfFwqDg"><img src="https://dcbadge.limes.pink/api/server/zkspfFwqDg" alt="" /></a></td>
-  </tr>
-    <tr>
-    <th><a href="#bot-account">Bot Account</a></th>
-    <td><img src="https://dcbadge.limes.pink/api/shield/852977967776399400?bot=true" alt="" /></td>
+    <td align="center"><img src="https://dcbadge.limes.pink/api/shield/406125028065804289" alt="" /></td>
+    <td align="center"><a target="_blank" href="https://discord.gg/zkspfFwqDg"><img src="https://dcbadge.limes.pink/api/server/zkspfFwqDg" alt="" /></a></td>
+    <td align="center"><img src="https://dcbadge.limes.pink/api/shield/852977967776399400?bot=true" alt="" /></td>
   </tr>
 </table>
 
@@ -115,3 +115,7 @@ The API returns an SVG image, so you can embed it in your html just like you wou
   alt="write a description depending on your usage"
 />
 ```
+
+<br>
+<br>
+<p align="right">made with ❤ by <a href="https://limes.pink" target="_blank">limes.pink</a></p>
