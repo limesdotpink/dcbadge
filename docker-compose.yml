@@ -2,7 +2,7 @@ services:
   dcbadge:
     #build: .
     restart: unless-stopped
-    image: ghcr.io/limesdotpink/dcbadge:v3.0.1
+    image: ghcr.io/limesdotpink/dcbadge:main
     ports:
      - '9398:9398'
     env_file: '.env'
