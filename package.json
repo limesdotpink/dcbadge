@@ -5,11 +5,11 @@
     "bufferutil": "^4.0.8",
     "discord.js": "^14.15.2",
     "dotenv": "^16.4.5",
-    "express": "^4.22.2",
+    "express": "^5.2.1",
     "keyv": "^5.2.3",
     "node-fetch-cache": "^5.1.0",
     "typescript": "^5.9.3",
-    "undici": "^7.28.0",
+    "undici": "^7.29.0",
     "utf-8-validate": "^6.0.3"
   },
   "scripts": {
