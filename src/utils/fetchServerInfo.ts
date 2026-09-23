@@ -11,8 +11,7 @@ import Keyv from "keyv";
 const keyv = new Keyv();
 
 // set up proxy
-import { ProxyAgent, fetch } from "undici";
-const dispatcher = new ProxyAgent(process.env.PROXY_URL);
+import { ProxyAgent, fetch as undiciFetch } from "undici";
 
 export default async function fetchServerInfo(invite: string) {
   const inviteID = regexes.inviteUrl.exec(invite)?.groups?.code ?? invite;
@@ -54,14 +53,44 @@ export default async function fetchServerInfo(invite: string) {
 async function _fetchServer(inviteID: string) {
   const reconstructedInviteURL = `https://discord.com/api/v10/invites/${inviteID}?with_counts=true&with_expiration=true`;
 
+  const proxyUrl = process.env.PROXY_URL;
+  async function proxyFetch(actualUrl: string) {
+    if (proxyUrl) {
+      const dispatcher = new ProxyAgent(proxyUrl);
+
+      return await undiciFetch(actualUrl, {
+        method: "GET", headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.10 Safari/605.1.1",
+        }, dispatcher
+      });
+    } else {
+      console.log(
+        `no proxy url provided, falling back to raw request for ${actualUrl}`,
+      );
+      return await undiciFetch(actualUrl, {
+        method: "GET",
+      });
+    }
+  }
+
   try {
-    const serverFetch = await fetch(reconstructedInviteURL, {
+    // fetch the actual page
+    let serverFetch = await undiciFetch(reconstructedInviteURL, {
+      method: "GET",
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.3595.94",
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.10 Safari/605.1.1",
       },
-      dispatcher,
     });
+
+    // use proxy if raw request fails. do not attempt to fetch 4xx and 5xx errors with proxy
+    if (!serverFetch.ok) {
+      const scs = serverFetch.status.toString();
+      if (!scs.startsWith("4")) {
+        serverFetch = await proxyFetch(reconstructedInviteURL);
+      }
+    }
 
     type serverRes = {
       message: string;
