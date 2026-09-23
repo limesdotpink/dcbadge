@@ -14,13 +14,13 @@ export default async function fetchUserStatus(
 
     const guild = discordClient.guilds.cache.get(guildID);
 
-    const member = await guild.members.fetch({
+    const member = await guild?.members.fetch({
       user: userID,
       force: true,
       withPresences: true,
     });
 
-    if (Object.keys(member).length === 0) {
+    if (!member || Object.keys(member).length === 0) {
       throw new Error("member not found");
     }
 

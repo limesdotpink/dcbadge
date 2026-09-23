@@ -13,8 +13,9 @@ const keyv = new Keyv();
 // set up proxy
 import { ProxyAgent, fetch as undiciFetch } from "undici";
 
-export default async function fetchServerInfo(invite: string) {
-  const inviteID = regexes.inviteUrl.exec(invite)?.groups?.code ?? invite;
+export default async function fetchServerInfo(invite: string | string[]) {
+  const joinedInvite = invite ? [ ...invite ].join('/') : invite;
+  const inviteID = regexes.inviteUrl.exec(joinedInvite)?.groups?.code ?? joinedInvite;
 
   if (!inviteID || !regexes.inviteID.test(inviteID)) {
     return {
@@ -135,7 +136,7 @@ async function _fetchServer(inviteID: string) {
   } catch (error) {
     console.error("Fetch error:", error);
     return {
-      fetcherror: `network error: ${error.message}`,
+      fetcherror: `network error: ${error?.message}`,
     };
   }
 }

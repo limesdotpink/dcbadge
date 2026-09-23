@@ -42,8 +42,8 @@ client.once(Events.ClientReady, (readyClient) => {
     }
 
     const shield = await generateShield({
-      label: userInfo.username,
-      message: userInfo.status,
+      label: userInfo.username || '',
+      message: userInfo.status || '',
       compact: Boolean(compact).valueOf(),
       theme: theme as string,
       style: style as string,
@@ -54,9 +54,8 @@ client.once(Events.ClientReady, (readyClient) => {
     res.status(200).send(shield);
   });
 
-  app.get("/api/server/:invite*", async (req, res) => {
-    // @ts-expect-error: invite does exist
-    const invite = req.params.invite + req.params?.[0];
+  app.get("/api/server/*invite", async (req, res) => {
+    const invite = req.params.invite;
 
     const { compact, theme, style, logoColor, scale } = req.query;
 
