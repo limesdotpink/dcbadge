@@ -14,7 +14,7 @@ const keyv = new Keyv();
 import { ProxyAgent, fetch as undiciFetch } from "undici";
 
 export default async function fetchServerInfo(invite: string | string[]) {
-  const joinedInvite = invite ? [ ...invite ].join('/') : invite;
+  const joinedInvite = [ ...invite ].join('/');
   const inviteID = regexes.inviteUrl.exec(joinedInvite)?.groups?.code ?? joinedInvite;
 
   if (!inviteID || !regexes.inviteID.test(inviteID)) {
